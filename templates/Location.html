@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Brand</title>
+    <link rel="stylesheet" href="static/assets2/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    <link rel="stylesheet" href="static/assets2/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/assets2/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets2/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="static/assets2/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets2/css/Table-With-Search-1.css">
+    <link rel="stylesheet" href="static/assets2/css/Table-With-Search.css">
+</head>
+
+<body id="page-top" style="background-color: #5cdb95;">
+    <div id="wrapper" style="background-color: #5cdb95;">
+        <div class="d-flex flex-column" id="content-wrapper" style="background-color: #5cdb95;">
+            <div id="content">
+                <div class="container text-left" style="font-weight: normal;font-style: normal;width: 100%;">
+                    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+                        <div class="container"><a class="navbar-brand" href="#" style="font-family: Aclonica, sans-serif;font-size: 25px;color: #05386b;">Wander Lust</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                            <div
+                                class="collapse navbar-collapse" id="navcol-1">
+                                <!-- <ul class="nav navbar-nav mr-auto"> -->
+                                 <a class="login" href="/plans" style="color: #05386b;">My Plans</a>
+                                    <!-- <li class="nav-item" role="presentation"><a class="nav-link active" href="/plans" style="color: #05386b;">My Plans</a></li> -->
+                                    <!-- <li class="nav-item" role="presentation"></li> -->
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" style="color: #05386b;">Price&nbsp;</a>
+                                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/htol">High to Low</a><a class="dropdown-item" role="presentation" href="/ltoh">Low to High</a></div>
+                                    
+                                </ul><span class="navbar-text actions"> <a class="login" href="/uslogin/logout" style="color: #05386b;margin-left: 520px;">Log out</a><a class="btn btn-light action-button" role="button" href="/home" style="background-color: #05386b;">HOME</a></span></div>
+                </div>
+                </nav><img src="static/assets2/img/Traveller1.gif" style="width: 45%;">
+                <h1 class="text-center" style="width: 55%;margin-left: 430px;margin-bottom: 145px;margin-top: -224px;font-size: 43px;color: #edf5e1;"><strong>YOU&nbsp;ARE NEVER TOO LATE TOO EXPLORE <em><span style="text-decoration: underline;">{{loc}}</span></em></strong></h1>
+            </div>
+            <div class="container-fluid"
+        style="margin-top: 20px;padding-right: 30px;padding-left: 30px;padding-top: 30px;padding-bottom: 30px;background-color: #05386b;margin-right: -103.1px;margin-left: 136.1px;width: 80%;margin-bottom: 10px;">
+        {% for item in value %}
+        <form method="POST" action="/addtoplan">
+    
+            <div class="card-body" style="font-size: 25px;"><img style="width: 100%;height: 100%;"
+                    src="static\assets2\img\{{item[4]}}.jpg"></div>
+            <div class="row" style="background-color: #07386a;">
+                <div class="col" style="background-color: #05386b;">
+                    <div class="card shadow mb-3" style="color: #05386b;">
+                        <div class="card-header py-3" style="margin-left: 0px;color: #05386b;">
+                            <p style="font-size: 28px;" value="{{item[0]}}" name="ev_name"><strong>{{item[0]}}</strong></p>
+                        </div>
+                        <div class="card-body" style="font-size: 25px;">
+                            <form >
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="username"
+                                                style="color: #05386b;"><strong>TIME :
+                                                    <select name="time" id="t_date" >
+                                                        <option style="display:none;"></option>
+                                                        {% for item2 in value2 %}
+                                                        {% if item[3]==item2[0] %}
+                                                        <tr>
+                                                            <option value="{{item2[2]}}" name="time"
+                                                                style="font-size: 20px;">{{item2[2]}}</option>
+                                                            <option value="{{item2[3]}}" name="time"
+                                                                style="font-size: 20px;">{{item2[3]}}</option>
+                                                            <option value="{{item2[4]}}" name="time"
+                                                                style="font-size: 20px;">{{item2[4]}}</option>
+                                                            <option value="{{item2[5]}}" name="time"
+                                                                style="font-size: 20px;">{{item2[5]}}</option>
+                                                            <!-- <input type="hidden" name="t_date" value="{{item[2]}}" /> -->
+                                                        </tr>
+                                                        {% endif %}
+                                                        {% else %}
+                                                            <input type="hidden" name="time" value="Null">
+                                                        <tr>
+                                                            <option style="display:none;"></option>
+                                                        </tr>
+                                                        
+                                                        {% endfor %}
+                                                    </select>
+                                                </strong></label></div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group"><label for="email" style="color: #05386b;"><strong>DATE:<input type="date" id="date" name="e_date">
+                                                </strong></label></div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="last_name"
+                                                style="color: #05386b;"><strong>ADDRESS:
+                                                    <input type="hidden" value="{{item[6]}}" name="e_add">{{item[6]}}
+                                                </strong>&nbsp;&nbsp;</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="last_name"
+                                                style="color: #05386b;"><strong>PRICE:Rs.
+                                                    <input type="hidden" name="e_price" value="{{item[5]}}">{{item[5]}}
+                                                </strong>&nbsp;&nbsp;</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="{{item[0]}}" name="e_name">
+                                <input type="hidden" value={{loc}} name="c_loc">
+                                <div class="form-group text-center" style="margin-top: 15px;"><button
+                                        class="btn btn-primary btn btn-light" type="action button"
+                                        style="background-color: #05386b;margin-top: 0px;width: 185px;height: 50px;color: #edf5e1;font-size: 20px;"><strong>Add to Planner&nbsp;</strong></button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    <!-- </div>
+    </div> -->
+        <footer class="bg-white sticky-footer">
+                <div class="text-center my-auto copyright"><span style="color: rgb(5,56,107);font-size: 16px;"><strong>Copyright © WanderLust 2021</strong></span></div>
+        </footer>
+   
+    <script src="static/assets2/js/jquery.min.js"></script>
+    <script src="static/assets2/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="static/assets2/js/Table-With-Search.js"></script>
+    <script src="static/assets2/js/theme.js"></script>
+</body>
+
+</html>

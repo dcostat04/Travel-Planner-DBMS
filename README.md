@@ -1,1 +1,1 @@
-# Travel-Planner-DBMS
+# Travel-itienary-planner

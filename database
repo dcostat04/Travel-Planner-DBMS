@@ -1,0 +1,142 @@
+create database travel;
+use travel;
+
+CREATE TABLE IF NOT EXISTS account1 (
+	id int(11) NOT NULL AUTO_INCREMENT,
+  	username varchar(50) NOT NULL,
+  	passw varchar(255) NOT NULL,
+  	email varchar(100) NOT NULL,
+    phone varchar(100) NOT NULL,
+    dloc varchar(30),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+create table planner(
+id int not null auto_increment,
+u_id int not null,
+username varchar(50) not null,
+location varchar(20) not null,
+e_name varchar(20) not null,
+price int not null,
+e_date date not null,
+e_time varchar(11),
+address varchar(255),
+primary key(id)
+);
+
+
+create table hist(
+id int not null auto_increment,
+username varchar(50) not null,
+location varchar(20) not null,
+e_name varchar(20) not null,
+price int not null,
+e_date date not null,
+e_time varchar(11),
+primary key(id)
+);
+
+create table locat(
+l_id int auto_increment not null,
+l_name varchar(20) not null,
+primary key(l_id)
+);
+
+create table loc_event(
+e_id int auto_increment not null,
+photoname varchar(20) ,
+e_name varchar(40) not null,
+price int not null,
+address varchar(40) not null,
+le_id int,
+foreign key(le_id) references locat(l_id),
+primary key(e_id)
+);
+
+create table timing(
+t_id int auto_increment not null,
+st1 varchar(11),
+st2 varchar(11),
+st3 varchar(11),
+st4 varchar(11),   
+te_id int,
+foreign key(te_id) references loc_event(e_id),
+primary key(t_id)
+);
+
+DELIMITER &&
+CREATE TRIGGER hist_adder
+    after insert ON hist
+    FOR EACH ROW 
+	delete from planner where username=new.username and e_name=new.e_name;
+	&&
+DELIMITER ;   
+
+-- insert into hist(username,location,e_name,price,e_date,e_time) value('Edwin','Panvel','Wankhede','700','2021-05-06','2:15-3:15');     
+-- drop trigger hist_adder;
+
+
+insert into locat(l_name)
+values ('Airoli'),('Bhandup'),('Panvel'),('Vashi');
+-- insert into loc_event(e_name,price,address,le_id,photoname) values ('SagarVihar','200','Vashi Beach','4','bhandupdock');+
+insert into loc_event(e_name,price,address,le_id,photoname) values ('INOX','500','Airoli Mall','1','INOX'),
+														('Flamingo Point','200','Airoli Bridge','1','Flamingo Point'),
+														('Hill Top','300','Airoli Hill','1','Hill Top'),
+														('WonderLand','700','Airoli ','1','WonderLand'),
+
+														('SnowWorld','600','Bhandup World','2','SnowWorld'),
+														('Naval Dockyard','200','Bhandup Port','2','Naval Dockyard'),
+														('Hanging Garden','400','Upwan Lake','2','Hanging Garden'),
+														('Avenger Theme Park','700','Marvel Land','2','Avenger Theme Park'),
+                                                        
+                                                        ('Panvel Fort','200','Panvel Hill','3','Panvel Fort'),
+														('Airport','50','New Panvel','3','Airport'),
+														('Bowling House','400','Panvel Mall','3','Bowling House'),
+														('Wankhede','700','Old Panvel','3','Wankhede'),
+                                                        
+                                                        ('FCRIT','200','Sector 10','4','FCRIT2'),
+														('Mini Seashore','100','Sector 9','4','Mini Seashore'),
+														('Inorbit','400','Sector 17,Station Road','4','Inorbit'),
+                                                        ('SagarVihar','200','Vashi Beach','4','SagarVihar');
+
+
+insert into timing(st1,st2,st3,st4,te_id) values ('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','1'),
+										('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','4'),
+										('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','5'),
+										('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','8'),
+                                        ('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','11'),
+										('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','12'),
+										('11:15-12:15','12:15-1:15','1:15-2:15','2:15-3:15','15');
+								
+
+select * from account1;
+select * from locat where not l_name='Bhandup';
+select * from loc_event;
+select * from timing;
+select * from locat left outer join loc_event on l_id=le_id ;
+select * from locat left outer join loc_event on l_id=le_id left outer join timing on e_id=te_id where l_name='Vashi';
+select * from locat left outer join loc_event on l_id=le_id left outer join timing on e_id=te_id;
+
+select e_id,e_name,st1,st2,st3,st4 from loc_event inner join timing on e_id=te_id where le_id=4;
+select * from planner;
+
+
+select Distinct(e_name),l_id,l_name,e_id,photoname,price,address,le_id from locat left outer join loc_event on l_id=le_id  where l_name='Airoli' and e_name not in (select e_name from planner where username='Modi');
+
+
+
+
+
+
+select Distinct(e_name),l_id,l_name,e_id,photoname,price,address,le_id from locat left outer join loc_event on l_id=le_id  where l_name='Bhandup' group by SnowWorld;
+
+select e_name from planner where username='Christo';
+
+truncate planner;
+truncate hist;
+
+select * from hist;
+Select* from loc_event;
+
+

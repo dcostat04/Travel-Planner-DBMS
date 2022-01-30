@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>DBMS_Project</title>
+    <link rel="stylesheet" href="static/assets2/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
+    <link rel="stylesheet" href="static/assets2/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="static/assets2/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="static/assets2/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="static/assets2/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="static/assets2/css/Table-With-Search-1.css">
+    <link rel="stylesheet" href="static/assets2/css/Table-With-Search.css">
+</head>
+
+<body style="background-color: #5cdb95;">
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="#"
+                style="font-family: Aclonica, sans-serif;font-size: 25px;color: #05386b;">Wander Lust</a><button
+                data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"></li>
+                </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button"
+                        href="/home" style="background-color: #05386b;">HOME</a><a class="btn btn-light action-button"
+                        role="button" href="/history"
+                        style="background-color: #05386b;margin-left: 10px;">History</a>
+                        <a class="login" href="/uslogin/logout"
+                        style="color: #05386b;">Log out</a></span>
+            </div>
+        </div>
+    </nav>
+    <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+        <div class="table-responsive table-bordered table table-hover table-bordered results">
+            <table class="table table-bordered table-hover">
+                <thead class="bill-header cs" style="background-color: #05386b;font-size: 22px;">
+                    <tr>
+                        <th id="trs-hd" class="col-lg-1" style="width: 275px;">Event Name</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Location</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Price</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Date&nbsp;</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Time</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Address</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Remove</th>
+                        <th id="trs-hd" class="col-lg-2" style="width: 137px;">Attended</th>
+                    </tr>
+                </thead>
+                <tbody style="font-family: Nunito, sans-serif;">
+                    <tr class="warning no-result">
+                        <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                    </tr>
+
+                    {% for item in value %}
+                    <form method="POST" action="/rem">
+                        <tr class="text-center" style="background-color: #ffffff;color: rgb(0,0,0);font-size: 16px;">
+                            <td style="width: 367px;"><input type="hidden" name="e_name" value="{{item[1]}}">{{item[1]}}
+                            </td>
+                            <td>{{item[0]}}</td>
+                            <td>{{item[2]}}</td>
+                            <td>{{item[3]}}</td>
+                            <td>{{item[4]}}</td>
+                            <td>{{item[5]}}</td>
+                            <td><button class="btn btn-danger" style="margin-left: 5px;" type="submit"><i
+                                        class="fa fa-trash" style="font-size: 15px;"></i></button></td>
+                    </form>
+                    <td><form method="POST" action="/historyins">
+                        <input type="hidden" value={{item[1]}} name="e_name">
+                        <input type="hidden" value={{item[0]}} name="loc">
+                        <input type="hidden" value={{item[2]}} name="price">
+                        <input type="hidden" value={{item[3]}} name="date">
+                        <!-- <input type="hidden" value={{item[4]}} name="time"> -->
+                        <button class="btn btn-success" style="margin-left: 5px;" type="submit"><i class="fa fa-check"
+                                style="font-size: 15px;">
+                            </i></button>
+                    </form></td></tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group"><label for="email"
+                style="color: #ffffff;font-size: xx-large;"><strong>Expenditure:Rs.{{exp[0][0]}}
+                </strong></label></div>
+    </div>
+    <script src="static/assets2/js/jquery.min.js"></script>
+    <script src="static/assets2/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="static/assets2/js/Table-With-Search.js"></script>
+    <script src="static/assets2/js/theme.js"></script>
+</body>
+
+</html>
